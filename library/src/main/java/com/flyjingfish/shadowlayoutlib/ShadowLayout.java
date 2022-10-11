@@ -73,20 +73,20 @@ public class ShadowLayout extends FrameLayout {
             float radialGradientRadius = shadowMaxLength / 2f + shadowRadius;
 
             RadialGradient radialGradient;
-            radialGradient = new RadialGradient(shadowMaxLength / 2f + shadowRadius,shadowRadius + shadowMaxLength / 2f,radialGradientRadius, gradientColors,null,Shader.TileMode.CLAMP);
+            radialGradient = new RadialGradient(shadowMaxLength / 2f + shadowRadius,shadowRadius + shadowMaxLength / 2f,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
             mBgPaint.setShader(radialGradient);
 
             canvas.drawArc(leftTopRectF, -90, -90, false, mBgPaint);
 
-            radialGradient = new RadialGradient(width - shadowMaxLength / 2f - shadowRadius,shadowRadius + shadowMaxLength / 2f,radialGradientRadius, gradientColors,new float[]{0f,1f},Shader.TileMode.CLAMP);
+            radialGradient = new RadialGradient(width - shadowMaxLength / 2f - shadowRadius,shadowRadius + shadowMaxLength / 2f,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
             mBgPaint.setShader(radialGradient);
             canvas.drawArc(rightTopRectF, 0, -90, false, mBgPaint);
 
-            radialGradient = new RadialGradient(width - shadowMaxLength / 2f - shadowRadius,height - shadowRadius - shadowMaxLength / 2f,radialGradientRadius, gradientColors,new float[]{0f,1f},Shader.TileMode.CLAMP);
+            radialGradient = new RadialGradient(width - shadowMaxLength / 2f - shadowRadius,height - shadowRadius - shadowMaxLength / 2f,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
             mBgPaint.setShader(radialGradient);
             canvas.drawArc(rightBottomRectF, 0, 90, false, mBgPaint);
 
-            radialGradient = new RadialGradient(shadowMaxLength / 2f + shadowRadius,height - shadowRadius - shadowMaxLength / 2f,radialGradientRadius, gradientColors,new float[]{0f,1f},Shader.TileMode.CLAMP);
+            radialGradient = new RadialGradient(shadowMaxLength / 2f + shadowRadius,height - shadowRadius - shadowMaxLength / 2f,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
             mBgPaint.setShader(radialGradient);
             canvas.drawArc(leftBottomRectF, 90, 90, false, mBgPaint);
 
@@ -99,7 +99,7 @@ public class ShadowLayout extends FrameLayout {
             ptsLeft[1] = shadowRadius + shadowMaxLength / 2f;
             ptsLeft[2] = shadowMaxLength /2f;
             ptsLeft[3] = height - shadowRadius - shadowMaxLength / 2f;
-            linearGradient = new LinearGradient(shadowMaxLength / 2f + shadowRadius, 0, 0, 0, gradientColors, null, Shader.TileMode.CLAMP);
+            linearGradient = new LinearGradient(shadowMaxLength / 2f + shadowRadius, 0, 0, 0, gradientColors, gradientPositions, Shader.TileMode.CLAMP);
             mBgPaint.setShader(linearGradient);
             canvas.drawLines(ptsLeft, mBgPaint);
 
@@ -109,7 +109,7 @@ public class ShadowLayout extends FrameLayout {
             ptsTop[1] = shadowMaxLength / 2f;
             ptsTop[2] = width - shadowMaxLength / 2f - shadowRadius;
             ptsTop[3] = shadowMaxLength / 2f;
-            linearGradient = new LinearGradient(0, shadowMaxLength / 2f + shadowRadius, 0, 0, gradientColors, null, Shader.TileMode.CLAMP);
+            linearGradient = new LinearGradient(0, shadowMaxLength / 2f + shadowRadius, 0, 0, gradientColors, gradientPositions, Shader.TileMode.CLAMP);
             mBgPaint.setShader(linearGradient);
             canvas.drawLines(ptsTop, mBgPaint);
 
@@ -119,7 +119,7 @@ public class ShadowLayout extends FrameLayout {
             ptsRight[1] = shadowMaxLength / 2f + shadowRadius;
             ptsRight[2] = width - shadowMaxLength / 2f;
             ptsRight[3] = height - shadowRadius - shadowMaxLength / 2f;
-            linearGradient = new LinearGradient(width - shadowRadius  - shadowMaxLength / 2f, 0, width, 0, gradientColors, null, Shader.TileMode.CLAMP);
+            linearGradient = new LinearGradient(width - shadowRadius  - shadowMaxLength / 2f, 0, width, 0, gradientColors, gradientPositions, Shader.TileMode.CLAMP);
             mBgPaint.setShader(linearGradient);
             canvas.drawLines(ptsRight, mBgPaint);
 
@@ -129,7 +129,7 @@ public class ShadowLayout extends FrameLayout {
             ptsBottom[1] = height - shadowMaxLength / 2f;
             ptsBottom[2] = width - shadowMaxLength / 2f - shadowRadius;
             ptsBottom[3] = height - shadowMaxLength / 2f;
-            linearGradient = new LinearGradient(0, height - shadowRadius - shadowMaxLength / 2f, 0, height, gradientColors, null, Shader.TileMode.CLAMP);
+            linearGradient = new LinearGradient(0, height - shadowRadius - shadowMaxLength / 2f, 0, height, gradientColors, gradientPositions, Shader.TileMode.CLAMP);
             mBgPaint.setShader(linearGradient);
             canvas.drawLines(ptsBottom, mBgPaint);
         }else {
