@@ -97,6 +97,9 @@
 |shadow_start_color|color|阴影开始颜色|
 |shadow_end_color|color|阴影结束颜色（不设置则默认透明色）|
 
+**特别说明：shadow_inscribed_radius低于shadow_max_length时，内切圆角将会变成直角，请尽量使shadow_inscribed_radius大于shadow_max_length值**
+
+
 # 最后推荐我写的另一个库，轻松实现在应用内点击小图查看大图的动画放大效果
 
 - [OpenImage](https://github.com/FlyJingFish/OpenImage)
