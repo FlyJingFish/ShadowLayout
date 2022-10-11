@@ -52,8 +52,6 @@
 </com.flyjingfish.shadowlayoutlib.ShadowLayout>
 ```
 
-### 使用说明
-
 **1，需要特别设置一下padding，通过设置各个方向的padding值可调整各边漏出的阴影长度,宽高设置wrap_content最佳**
 
 2，阴影颜色分布可通过setGradientPositions设置，默认null值均匀分布
@@ -72,5 +70,7 @@
 # 最后推荐我写的另一个库，轻松实现在应用内点击小图查看大图的动画放大效果
 
 - [OpenImage](https://github.com/FlyJingFish/OpenImage)
+
+- [更多开源库](https://github.com/FlyJingFish)
 
 
