@@ -50,7 +50,7 @@ public class ShadowLayout extends FrameLayout {
 
 
         gradientColors = new int[]{startColor,endColor};
-        gradientPositions = new float[]{0,1};
+        gradientPositions = null;
     }
 
 
