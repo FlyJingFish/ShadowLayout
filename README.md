@@ -1,6 +1,6 @@
 # ShadowLayout
 
-## 支持自定义阴影颜色
+## 支持自定义阴影颜色，自定义四个边的阴影宽度
 
 [![](https://jitpack.io/v/FlyJingFish/ShadowLayout.svg)](https://jitpack.io/#FlyJingFish/ShadowLayout)
 
