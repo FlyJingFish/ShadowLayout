@@ -12,6 +12,7 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class ShadowLayout extends FrameLayout {
@@ -211,8 +212,11 @@ public class ShadowLayout extends FrameLayout {
         return gradientColors;
     }
 
-    public void setGradientColors(int[] gradientColors) {
+    public void setGradientColors(@NonNull int[] gradientColors) {
         this.gradientColors = gradientColors;
+        if (gradientPositions != null && gradientColors.length != gradientPositions.length){
+            this.gradientPositions = null;
+        }
         invalidate();
     }
 
