@@ -59,19 +59,23 @@ public class ShadowLayout extends FrameLayout {
     protected void dispatchDraw(Canvas canvas) {
         int height = getHeight();
         int width = getWidth();
-        final int saveCount = canvas.getSaveCount();
-        canvas.save();
 
         float shadowRadius = shadowInscribedRadius;
         mBgPaint.setStrokeWidth(shadowMaxLength);
         if (shadowRadius>=shadowMaxLength){
             shadowRadius = shadowInscribedRadius + shadowMaxLength/2;
+            float radialGradientRadius = shadowMaxLength / 2f + shadowRadius;
+            if (radialGradientRadius<=0){
+                super.dispatchDraw(canvas);
+                return;
+            }
+
             RectF leftTopRectF = new RectF(shadowMaxLength / 2f, shadowMaxLength / 2f, shadowRadius * 2 + shadowMaxLength / 2f, shadowRadius * 2 + shadowMaxLength / 2f);
             RectF rightTopRectF = new RectF(width - shadowRadius * 2 - shadowMaxLength / 2f, shadowMaxLength / 2f, width - shadowMaxLength / 2f, shadowRadius * 2 + shadowMaxLength / 2f);
             RectF rightBottomRectF = new RectF(width - shadowRadius * 2 - shadowMaxLength / 2f, height - shadowRadius * 2 - shadowMaxLength / 2f, width - shadowMaxLength / 2f, height - shadowMaxLength / 2f);
             RectF leftBottomRectF = new RectF(shadowMaxLength / 2f, height - shadowRadius * 2 - shadowMaxLength / 2f, shadowRadius * 2 + shadowMaxLength / 2f, height - shadowMaxLength / 2f);
 
-            float radialGradientRadius = shadowMaxLength / 2f + shadowRadius;
+
 
             RadialGradient radialGradient;
             radialGradient = new RadialGradient(shadowMaxLength / 2f + shadowRadius,shadowRadius + shadowMaxLength / 2f,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
@@ -134,13 +138,18 @@ public class ShadowLayout extends FrameLayout {
             mBgPaint.setShader(linearGradient);
             canvas.drawLines(ptsBottom, mBgPaint);
         }else {
+            float radialGradientRadius = shadowMaxLength;
+            if (radialGradientRadius<=0){
+                super.dispatchDraw(canvas);
+                return;
+            }
 
             RectF leftTopRectF = new RectF(0, 0, shadowMaxLength, shadowMaxLength);
             RectF rightTopRectF = new RectF(width - shadowMaxLength, 0, width , shadowMaxLength);
             RectF rightBottomRectF = new RectF(width - shadowMaxLength, height - shadowMaxLength, width, height);
             RectF leftBottomRectF = new RectF(0, height - shadowMaxLength, shadowMaxLength, height);
 
-            float radialGradientRadius = shadowMaxLength;
+
 
             RadialGradient radialGradient;
             radialGradient = new RadialGradient(shadowMaxLength,shadowMaxLength,radialGradientRadius, gradientColors,gradientPositions,Shader.TileMode.CLAMP);
@@ -204,7 +213,6 @@ public class ShadowLayout extends FrameLayout {
             canvas.drawLines(ptsBottom, mBgPaint);
         }
 
-        canvas.restoreToCount(saveCount);
         super.dispatchDraw(canvas);
     }
 

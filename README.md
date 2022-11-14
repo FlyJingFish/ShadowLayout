@@ -22,7 +22,7 @@
 
 ```gradle
     dependencies {
-        implementation 'com.github.FlyJingFish:ShadowLayout:1.0.2'
+        implementation 'com.github.FlyJingFish:ShadowLayout:1.0.3'
     }
 ```
 ## 第三步，使用说明
@@ -90,12 +90,12 @@
 
 ### 属性一览
 
-|attr|format|description|
-|---|:---:|:---:|
-|shadow_max_length|dimension|阴影绘制最大长度|
-|shadow_inscribed_radius|dimension|阴影内切圆角|
-|shadow_start_color|color|阴影开始颜色|
-|shadow_end_color|color|阴影结束颜色（不设置则默认透明色）|
+| attr                    |  format   |    description    |
+|-------------------------|:---------:|:-----------------:|
+| shadow_max_length       | dimension |     阴影绘制最大长度      |
+| shadow_inscribed_radius | dimension |      阴影内切圆角       |
+| shadow_start_color      |   color   |      阴影开始颜色       |
+| shadow_end_color        |   color   | 阴影结束颜色（不设置则默认透明色） |
 
 **特别说明：shadow_inscribed_radius低于shadow_max_length时，内切圆角将会变成直角，请尽量使shadow_inscribed_radius大于shadow_max_length值**
 
