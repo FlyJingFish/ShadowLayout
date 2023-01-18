@@ -3,6 +3,10 @@
 ## 支持自定义阴影颜色，自定义四个边的阴影宽度
 
 [![](https://jitpack.io/v/FlyJingFish/ShadowLayout.svg)](https://jitpack.io/#FlyJingFish/ShadowLayout)
+[![GitHub stars](https://img.shields.io/github/stars/FlyJingFish/ShadowLayout.svg)](https://github.com/FlyJingFish/ShadowLayout/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/FlyJingFish/ShadowLayout.svg)](https://github.com/FlyJingFish/ShadowLayout/network)
+[![GitHub issues](https://img.shields.io/github/issues/FlyJingFish/ShadowLayout.svg)](https://github.com/FlyJingFish/ShadowLayout/issues)
+[![GitHub license](https://img.shields.io/github/license/FlyJingFish/ShadowLayout.svg)](https://github.com/FlyJingFish/ShadowLayout/blob/master/LICENSE)
 
 
 <img src="https://github.com/FlyJingFish/ShadowLayout/blob/master/screenshot/Screenshot_20221011_141145.jpg" width="405px" height="842px" alt="show" />
