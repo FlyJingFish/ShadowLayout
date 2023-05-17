@@ -1,6 +1,7 @@
 package com.flyjingfish.shadowlayoutlib;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,8 +13,13 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ShadowLayout extends FrameLayout {
 
@@ -22,6 +28,7 @@ public class ShadowLayout extends FrameLayout {
     private float[] gradientPositions;
     private float shadowMaxLength;
     private float shadowInscribedRadius;
+    private final List<ColorStateList> gradientColorStates = new ArrayList<>();
 
     public ShadowLayout(Context context) {
         this(context,null);
@@ -38,8 +45,8 @@ public class ShadowLayout extends FrameLayout {
         shadowMaxLength = a.getDimension(R.styleable.ShadowLayout_shadow_max_length, 0);
         shadowInscribedRadius = a.getDimension(R.styleable.ShadowLayout_shadow_inscribed_radius, shadowMaxLength);
 
-        int startColor = a.getColor(R.styleable.ShadowLayout_shadow_start_color, Color.TRANSPARENT);
-        int endColor = a.getColor(R.styleable.ShadowLayout_shadow_end_color, Color.TRANSPARENT);
+        ColorStateList startColor = a.getColorStateList(R.styleable.ShadowLayout_shadow_start_color);
+        ColorStateList endColor = a.getColorStateList(R.styleable.ShadowLayout_shadow_end_color);
 
         a.recycle();
 
@@ -49,11 +56,60 @@ public class ShadowLayout extends FrameLayout {
         mBgPaint.setStrokeWidth(shadowMaxLength);
         mBgPaint.setStyle(Paint.Style.STROKE);
 
+        if (startColor == null){
+            startColor = ColorStateList.valueOf(Color.TRANSPARENT);
+        }
+        if (endColor == null){
+            endColor = ColorStateList.valueOf(Color.TRANSPARENT);
+        }
 
-        gradientColors = new int[]{startColor,endColor};
+        gradientColorStates.add(startColor);
+        gradientColorStates.add(endColor);
+        updateColors();
         gradientPositions = null;
     }
 
+    @Override
+    protected void drawableStateChanged() {
+        super.drawableStateChanged();
+        updateColors();
+    }
+
+    private boolean updateColors(){
+        boolean inval = false;
+        final int[] drawableState = getDrawableState();
+        if (gradientColorStates != null && gradientColorStates.size() > 0){
+            int[] gradientCls = new int[gradientColorStates.size()];
+            for (int i = 0; i < gradientColorStates.size(); i++) {
+                int gradientColor = gradientColorStates.get(i).getColorForState(drawableState, 0);
+                gradientCls[i] = gradientColor;
+            }
+            if (gradientColors == null) {
+                gradientColors = gradientCls;
+                inval = true;
+            } else if (gradientColors.length != gradientCls.length){
+                gradientColors = gradientCls;
+                inval = true;
+            } else {
+                boolean equals = true;
+                for (int i = 0; i < gradientColors.length; i++) {
+                    if (gradientColors[i] != gradientCls[i]){
+                        equals = false;
+                        break;
+                    }
+                }
+                if (!equals){
+                    gradientColors = gradientCls;
+                    inval = true;
+                }
+            }
+        }
+
+        if (inval){
+            invalidate();
+        }
+        return inval;
+    }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
@@ -220,12 +276,27 @@ public class ShadowLayout extends FrameLayout {
         return gradientColors;
     }
 
-    public void setGradientColors(@NonNull int[] gradientColors) {
-        this.gradientColors = gradientColors;
-        if (gradientPositions != null && gradientColors.length != gradientPositions.length){
+    public List<ColorStateList> getGradientColorStates() {
+        return gradientColorStates;
+    }
+    public void setGradientColors(@NonNull @ColorInt int[] gradientColors) {
+        ColorStateList[] colorStateLists = new ColorStateList[gradientColors.length];
+        for (int i = 0; i < gradientColors.length; i++) {
+            colorStateLists[i] = ColorStateList.valueOf(gradientColors[i]);
+        }
+        setGradientColors(colorStateLists);
+    }
+
+    public void setGradientColors(@NonNull ColorStateList[] colorStateLists) {
+        gradientColorStates.clear();
+        gradientColorStates.addAll(Arrays.asList(colorStateLists));
+        if (gradientColorStates.size() == 1){
+            gradientColorStates.add(ColorStateList.valueOf(Color.TRANSPARENT));
+        }
+        if (gradientPositions != null && gradientColorStates.size() != gradientPositions.length){
             this.gradientPositions = null;
         }
-        invalidate();
+        updateColors();
     }
 
     public float[] getGradientPositions() {

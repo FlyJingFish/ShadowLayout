@@ -3,7 +3,7 @@
     <declare-styleable name="ShadowLayout">
         <attr name="shadow_max_length" format="dimension" />
         <attr name="shadow_inscribed_radius" format="dimension" />
-        <attr name="shadow_start_color" format="color"/>
-        <attr name="shadow_end_color" format="color"/>
+        <attr name="shadow_start_color" format="color|reference"/>
+        <attr name="shadow_end_color" format="color|reference"/>
     </declare-styleable>
 </resources>

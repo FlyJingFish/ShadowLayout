@@ -60,6 +60,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <com.flyjingfish.shadowlayoutlib.ShadowLayout
+            android:id="@+id/shadowLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
@@ -67,7 +68,7 @@
             android:paddingTop="5dp"
             android:paddingBottom="9dp"
             android:layout_marginStart="10dp"
-            app:shadow_start_color="@color/test_start_color"
+            app:shadow_start_color="@color/press_end"
             app:shadow_max_length="9dp"
             app:shadow_inscribed_radius="15dp"
             >
